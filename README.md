@@ -11,6 +11,11 @@
 
 ### Ask anything about any YouTube video — powered by RAG + HuggingFace AI
 
+
+https://github.com/user-attachments/assets/7c4347cd-04ba-4639-9e72-93879a79491a
+
+
+
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![Flask](https://img.shields.io/badge/Flask-3.x-000000?style=flat-square&logo=flask&logoColor=white)](https://flask.palletsprojects.com)
 [![LangChain](https://img.shields.io/badge/LangChain-0.2%2B-1C3C3C?style=flat-square&logo=langchain&logoColor=white)](https://langchain.com)
