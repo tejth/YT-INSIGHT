@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YT Insight</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="8" stroke="#00ff88" stroke-width="1.5"/>
+            <polygon points="8,6.5 14,10 8,13.5" fill="#00ff88"/>
+          </svg>
+        </div>
+        <span class="logo-text">YT<span class="accent">INSIGHT</span></span>
+      </div>
+      <div class="status-dot" id="statusDot" title="Server status">
+        <span class="dot"></span>
+        <span class="status-label" id="statusLabel">checking...</span>
+      </div>
+    </header>
+
+    <!-- Screen: Load Video -->
+    <div class="screen active" id="screenLoad">
+      <div class="terminal-label">// paste youtube url or video id</div>
+
+      <div class="input-group">
+        <div class="input-wrapper">
+          <span class="input-prefix">▶</span>
+          <input
+            type="text"
+            id="videoUrl"
+            class="url-input"
+            placeholder="https://youtube.com/watch?v=..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="paste-btn" id="pasteBtn" title="Paste from clipboard">⌘V</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="loadBtn">
+        <span class="btn-text">LOAD VIDEO</span>
+        <span class="btn-icon">→</span>
+      </button>
+
+      <div class="loader hidden" id="loadLoader">
+        <div class="loader-bar"></div>
+        <span class="loader-text" id="loaderText">fetching transcript...</span>
+      </div>
+
+      <div class="error-box hidden" id="loadError"></div>
+
+      <!-- Quick suggestions -->
+      <div class="suggestions">
+        <div class="suggestions-label">// try asking after loading:</div>
+        <div class="chips">
+          <span class="chip">📋 summarize this video</span>
+          <span class="chip">🔑 key takeaways</span>
+          <span class="chip">📖 explain [concept]</span>
+          <span class="chip">⏱ what's at 10:00?</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen: Chat -->
+    <div class="screen hidden" id="screenChat">
+      <!-- Video info bar -->
+      <div class="video-bar">
+        <div class="video-meta">
+          <div class="video-id-badge">
+            <svg width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" stroke="#00ff88" stroke-width="1"/><polygon points="4.5,3.5 9,6 4.5,8.5" fill="#00ff88"/></svg>
+            <span id="videoIdDisplay">—</span>
+          </div>
+          <span class="chunk-count" id="chunkCount"></span>
+        </div>
+        <button class="btn-ghost" id="newVideoBtn">← new</button>
+      </div>
+
+      <!-- Transcript preview toggle -->
+      <div class="transcript-toggle" id="transcriptToggle">
+        <span>▸ transcript preview</span>
+      </div>
+      <div class="transcript-preview hidden" id="transcriptPreview"></div>
+
+      <!-- Chat messages -->
+      <div class="chat-window" id="chatWindow">
+        <div class="welcome-msg">
+          <div class="welcome-icon">◈</div>
+          <p>Video loaded. Ask me anything about it.</p>
+          <div class="quick-actions" id="quickActions">
+            <button class="quick-btn" data-q="Give me a complete summary of this video">Summary</button>
+            <button class="quick-btn" data-q="What are the key takeaways from this video?">Key points</button>
+            <button class="quick-btn" data-q="What topics are covered in this video?">Topics</button>
+            <button class="quick-btn" data-q="Explain the main concept discussed in this video">Main concept</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input row -->
+      <div class="chat-input-row">
+        <div class="chat-input-wrapper">
+          <textarea
+            id="questionInput"
+            class="question-input"
+            placeholder="ask anything about this video..."
+            rows="1"
+            spellcheck="false"
+          ></textarea>
+        </div>
+        <button class="send-btn" id="sendBtn" title="Send (Enter)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M2 8h12M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="error-box hidden" id="chatError"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
